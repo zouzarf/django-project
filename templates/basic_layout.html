@@ -22,21 +22,26 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a>
             </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-              </li>
-              
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
+            </li>
+            {% endif %}
           </ul>
+          {% if user.is_authenticated %}
+            
           <form class="form-inline my-2 my-lg-0" action="{% url 'accounts:logout' %}" method='POST' >
             {% csrf_token %}
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
           </form>
+          {% endif %}
         </div>
       </nav>
     <h1>New Django App</h1>
