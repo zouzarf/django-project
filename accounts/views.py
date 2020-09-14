@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UserCh
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
 from accounts.forms import SignupForm,EditProfileInfo
+from django.http import JsonResponse
 # Create your views here.
 def signup_view(request):
     if request.method=='POST':
@@ -30,6 +31,16 @@ def logout_view(request):
     if request.method=='POST':
         logout(request)
         return redirect('/')
+
+def changeemail(request):
+    if request.method=='POST':
+        form = EditProfileInfo(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'result':'success','email':form.cleaned_data['email']})
+    else:
+        form = EditProfileInfo(instance=request.user)
+    return JsonResponse({'result':'success','email':'nodata'})
 
 def profile(request):
     if request.method=='POST':
