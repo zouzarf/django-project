@@ -1,0 +1,12 @@
+{% extends 'basic_layout.html'%}
+
+{% block content %}
+<form class='site-form' action="{% url 'accounts:login' %}" method='post'>
+    {% csrf_token %}
+    <div class="form-group">
+        {{form.as_p}}
+    </div>
+    <input type="submit" class="btn btn-primary" ,value='Login'>
+</form>
+
+{% endblock %}

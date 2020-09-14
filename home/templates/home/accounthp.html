@@ -1,0 +1,16 @@
+<html>
+<head><title>Account Informations</title></head>
+<body>
+    <h1>Welcome to the account informations</h1>
+    <p>django app</p>
+    <nav><li>
+
+        <form action="{% url'accounts:logout' %}">
+            {% csrf_token %}
+            <button type='submit'> Logout </button>
+        </form> 
+
+    </li></nav>
+</body>
+
+</html>
